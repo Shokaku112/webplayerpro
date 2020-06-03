@@ -6,7 +6,9 @@
 </template>
 
 <script>
-
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap'
+import 'bootstrap/dist/js/bootstrap.bundle'
 
 export default {
   name: 'App',

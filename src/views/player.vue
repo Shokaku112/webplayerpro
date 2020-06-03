@@ -25,21 +25,65 @@
         <div class="clear"></div>
         <div class="line"></div>
         <!-- 清除nav1对下面itemtag的浮动影响 -->
-
+        <div style="text-align:center">
         <div class="itemtag">
-          <div class="itembox" v-for-key="(value,key,index) in listitem">
-            <a href="#"><img class="item-img" src="../assets/image/item-img/2.jpg"></a>
+
+          <div class="itembox" v-for="item in listitem" :key="item.index">
+            <a href="#"><img class="item-img" :src="item.imgurl"></a>
             <div class="itembonx-title">
-              <span class="itemname">【日式青春】放学后......</span>
+              <span class="itemname">{{item.itemname}}</span>
               <br>
               <div class="by">
-                  <span>by</span> <a class="itemhref" :href="{index}">xxxx</a>
+                  <span>by</span> <a class="itemhref" :href="item.href">{{item.itemhref}}</a>
               </div>
             </div>
           </div>
         </div>
+        
+      <div class="nav1">
+      <h2 class="nav1 a1"><a href="#">新碟上架</a></h2>
+      
+      </div>
+        <div class="clear"></div>
+        <div class="line"></div>
+        <!-- 清除nav1对下面itemtag的浮动影响 -->
+        <div class="center">
+        <div class="midpart">
+          <a class="left" >《</a>
+          <a class="right" @click="itemright">》</a>
+      
+         <ul class="itemul" v-bind:style="{transition:change3,left:change}" >
+           <li class="itemli"></li>
+           <li class="itemli"></li>
+           <li class="itemli"></li>
+           <li class="itemli"></li>
+           <li class="itemli"></li>
+         </ul>
+         
+          <ul class="itemul2" v-bind:style="{left:change2}">
+           <li class="itemli"></li>
+           <li class="itemli"></li>
+           <li class="itemli"></li>
+           <li class="itemli"></li>
+           <li class="itemli"></li>
+         </ul>
+        </div>
+        </div>
+      
+      
     </div>
-
+    <!-- itemtag -->
+     <div class="nav1">
+      <h2 class="nav1 a1"><a href="#">榜单</a></h2>
+       </div>
+        <div class="clear"></div>
+       <div class="line"></div>
+        <div class="bottom">
+            
+        </div>
+    </div>
+    
+    
   </div>
 
 </template>
@@ -49,16 +93,87 @@ import pic1 from '../assets/image/1.jpg'
 import pic2 from '../assets/image/2.jpg'
 import pic3 from '../assets/image/3.jpg'
 import pic4 from '../assets/image/3.jpg'
+
+import 'jquery/dist/jquery.js'
+import 'bootstrap/dist/js/bootstrap.js'
+import 'bootstrap/dist/css/bootstrap.css'
+
+
+
+
 export default {
  
     data(){
       return{
+       itemswip:[
+         {
+           isactive:true,
+           change:'161px'
+         },
+         {
+           isactive:false,
+           change:'0px'
+         },
+         ],
+        change3:'',
+        change2:'1000px',
+        change:"161px",
         listitem:[
           {
             itemname:"【日式青春】放学后......",
             itemhref:"xxxxxx",
             href:"www.baidu.com",
-            imgurl:"../assets/image/item-img/2.jpg"
+            imgurl:require('../assets/image/item-img/2.jpg')
+            
+          },
+           {
+            itemname:"【日式青春】放学后......",
+            itemhref:"xxxxxx",
+            href:"www.baidu.com",
+            imgurl:require('../assets/image/item-img/2.jpg')
+            // require('../assets/images/member.png')
+            
+          },
+           {
+            itemname:"【日式青春】放学后......",
+            itemhref:"xxxxxx",
+            href:"www.baidu.com",
+            imgurl:require('../assets/image/item-img/2.jpg')
+            
+          },
+           {
+            itemname:"【日式青春】放学后......",
+            itemhref:"xxxxxx",
+            href:"www.baidu.com",
+            imgurl:require('../assets/image/item-img/2.jpg')
+            
+          },
+           {
+            itemname:"【日式青春】放学后......",
+            itemhref:"xxxxxx",
+            href:"www.baidu.com",
+            imgurl:require('../assets/image/item-img/2.jpg')
+            
+          },
+            {
+            itemname:"【日式青春】放学后......",
+            itemhref:"愛(あい)してる ただそれだけで",
+            href:"www.baidu.com",
+            imgurl:require('../assets/image/item-img/2.jpg')
+            
+          },
+            {
+            itemname:"【日式青春】放学后......",
+            itemhref:"愛(あい)してる ただそれだけで",
+            href:"www.baidu.com",
+            imgurl:require('../assets/image/item-img/2.jpg')
+            
+          },
+            {
+            itemname:"【日式青春】放学后......",
+            itemhref:"愛(あい)してる ただそれだけで",
+            href:"www.baidu.com",
+            imgurl:require('../assets/image/item-img/2.jpg')
             
           }
         ],
@@ -79,6 +194,11 @@ export default {
            console.log("new"+index)
            console.log("old"+oldindex)
         
+      },
+      itemright(){
+        this.change='-1000px'
+        this.change3='left 3s'
+
       }
       //onchanged事件是carouesl.js文件下watch下的监听变量activeIndex函数，里面有两个参数分为当前激活对象，和之前激活对象
     //  在子组件中需要向父组件传值处使用this.$emit("function",param);   //其中function为父组件定义函数，param为需要传递参数
@@ -101,11 +221,95 @@ export default {
 }
 </script>
 
+
 <style scoped>
+.bottom{
+  width: 700px;
+  height: 480px;
+  background: yellow;
+  left: 10px;
+}
+.left{
+  float: left;
+  position: relative;
+  width: 17px;
+  height: 17px;
+  top: 100px;
+  left: 0;
+  
+ 
+}
+.right{
+  float: right;
+  position: relative;
+  width: 17px;
+  height: 17px;
+  top: 100px;
+  right:0;
+
+}
+
+.itemul{
+ 
+  margin: 0 auto;
+  list-style: none;
+  text-align: left;
+  width: 671px;
+  height: 150px;
+  padding-left:13px ;
+  position: absolute;
+  /* absoulute可以解决水平显示的问题 */
+  /* transition: left 3s; */
+}
+.itemul2{
+ 
+  margin: 0 auto;
+  list-style: none;
+  text-align: left;
+  width: 671px;
+  height: 150px;
+  position: absolute;
+  padding-left:13px ;
+
+}
+.itemli{
+  margin-top: 30px;
+  width:118px ;
+  height:150px ;
+  margin-left: 11px;
+  background: green;
+  float: left;
+  margin-bottom: 10px;
+  
+}
+
+.card{
+  width: 118px;
+  height: 150px;
+
+}
+.center{
+  padding: 30px;
+  text-align: center;
+}
+.midpart{
+ 
+  overflow: hidden;
+  width: 700px;
+  height: 200px;
+  background: grey;
+}
+.itemhref{
+  font-size: 12px;
+}
+a{
+  text-decoration:none
+}
 .itemhref{
   margin-left: 5px;
 }
 .by{
+  height: auto;
   text-align: left;
 }
 .itemname{
@@ -127,20 +331,21 @@ template{
   background:linear-gradient(to right,rgba(255,255,255,0),#0000CD,rgba(255,255,255,0))
 }
 .itembox{
-  margin-top:30px ;
-  width: 140px;
+  margin-left: 50px;
+  margin-top:50px ;
+  width: auto;
   height: 185px;
   background: white;
  
 }
 .itemtag{
   margin-top:10px ;
-  width: 600px;
+  width: 800px;
   height: 550px;
-  background: white;
-  flex-flow: row wrap;
+  background: grey;
   display: flex;
-  justify-content: space-between;
+  flex-flow: row wrap;
+  /* justify-content: space-between; */
   align-content: flex-start
 }
 .img{
@@ -167,7 +372,7 @@ template{
       
       margin: 0 auto;
       padding: 30px;
-      width: 55%;
+      width: 860px;
       height: 100%;
       background-color: white;
       border: 1px solid #d3d3d3;
