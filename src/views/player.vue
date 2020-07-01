@@ -2,7 +2,7 @@
   <div>
     <el-carousel :interval="4000" type="card" height="200px" @change="onchanged">
       
-      <el-carousel-item v-for="item in item" :key="item.index"  >
+      <el-carousel-item v-for="item in item" :key="item.index">
        <img class="img" :src="item.src"  v-bind:style="{filter:item.style}" >
       </el-carousel-item>
    
@@ -59,14 +59,16 @@
            <li class="itemli"></li>
            <li class="itemli"></li>
          </ul>
-         
-          <ul class="itemul2" v-bind:style="{left:change2}">
+
+          <ul class="itemul"  v-bind:style="{transition:change3,left:change2}">
            <li class="itemli"></li>
            <li class="itemli"></li>
            <li class="itemli"></li>
            <li class="itemli"></li>
            <li class="itemli"></li>
          </ul>
+         
+         
         </div>
         </div>
       
@@ -79,6 +81,130 @@
         <div class="clear"></div>
        <div class="line"></div>
         <div class="bottom">
+         <dl class="dlk">
+                <dt class="top">
+                  <div class="cover"><img class="cover-img" src="../assets/image/item-img/title1.jpg">
+                </div>
+                <div class="coverinfo">
+                  <a class="cover-title" href="">云音乐飙升</a>
+                  <div class="btn">
+                     <a class="play" href="">
+                       <svg class="bi bi-play-fill" width="22px" height="22px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+</svg>
+</a>
+                  <a class="collect" href="">
+                    <svg class="bi bi-collection-fill" width="22px" height="22px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <rect width="16" height="10" rx="1.5" transform="matrix(1 0 0 -1 0 14.5)"/>
+  <path fill-rule="evenodd" d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z"/>
+</svg>
+</a>
+                  </div>
+                 
+                </div>
+                </dt>
+                <dd class="dd">
+                 
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox end"><a class="songtitle bt" href="#">查看更多>></a></div></li>
+                  
+                  </dd> 
+            </dl>
+
+          <!-- list2 -->
+                   <dl class="dlk">
+                <dt class="top">
+                  <div class="cover"><img class="cover-img" src="../assets/image/item-img/title1.jpg">
+                </div>
+                <div class="coverinfo">
+                  <a class="cover-title" href="">云音乐飙升</a>
+                  <div class="btn">
+                     <a class="play" href="">
+                       <svg class="bi bi-play-fill" width="22px" height="22px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+</svg>
+</a>
+                  <a class="collect" href="">
+                    <svg class="bi bi-collection-fill" width="22px" height="22px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <rect width="16" height="10" rx="1.5" transform="matrix(1 0 0 -1 0 14.5)"/>
+  <path fill-rule="evenodd" d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z"/>
+</svg>
+</a>
+                  </div>
+                 
+                </div>
+                </dt>
+                <dd class="dd">
+                 
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox end"><a class="songtitle bt" href="#">查看更多>></a></div></li>
+                  
+                  </dd> 
+            </dl>
+            <!-- list3 -->
+                     <dl class="dlk">
+                <dt class="top">
+                  <div class="cover"><img class="cover-img" src="../assets/image/item-img/title1.jpg">
+                </div>
+                <div class="coverinfo">
+                  <a class="cover-title" href="">云音乐飙升</a>
+                  <div class="btn">
+                     <a class="play" href="">
+                       <svg class="bi bi-play-fill" width="22px" height="22px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+</svg>
+</a>
+                  <a class="collect" href="">
+                    <svg class="bi bi-collection-fill" width="22px" height="22px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <rect width="16" height="10" rx="1.5" transform="matrix(1 0 0 -1 0 14.5)"/>
+  <path fill-rule="evenodd" d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z"/>
+</svg>
+</a>
+                  </div>
+                 
+                </div>
+                </dt>
+                <dd class="dd">
+                 
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong "><div class="bottombox"><span>1</span><a class="songtitle" href="#">那些日子</a></div></li>
+                    <li class="bottom-itemsong unmark"><div class="bottombox end"><a class="songtitle bt" href="#">查看更多>></a></div></li>
+                  
+                  </dd> 
+            </dl>
+
+
+
+            
+            
+          
+          
             
         </div>
     </div>
@@ -116,8 +242,9 @@ export default {
          },
          ],
         change3:'',
-        change2:'1000px',
+        change2:'-675px !important',
         change:"161px",
+
         listitem:[
           {
             itemname:"【日式青春】放学后......",
@@ -196,7 +323,7 @@ export default {
         
       },
       itemright(){
-        this.change='-1000px'
+        this.change='-675px !important'
         this.change3='left 3s'
 
       }
@@ -223,10 +350,54 @@ export default {
 
 
 <style scoped>
+/* div{ 
+white-space:nowrap; 
+}  */
+.dd{
+  display: block;
+}
+.play{
+  margin-right:10px ;
+}
+.collect{
+  margin-left:10px ;
+}
+.cover-title{
+
+}
+.coverinfo{
+  float: left;
+  width: 116px;
+
+}
+.cover-img{
+  height: 100%;
+  width: 100%;
+}
+.cover{
+  float: left;
+  width: 80px;
+  height: 80px;
+  background: grey;
+}
+.top{
+  padding: 0px;
+  height: 100px;
+  margin: 20px 0 0 20px;
+}
+.dlk{
+
+  float: left;
+  width:230px ;
+  border: 1px solid #c3c3c3;
+  background: #f4f4f4;
+  height: auto;
+  overflow: hidden;
+}
 .bottom{
-  width: 700px;
+  width: 800px;
   height: 480px;
-  background: yellow;
+  background: white;
   left: 10px;
 }
 .left{
@@ -250,19 +421,21 @@ export default {
 }
 
 .itemul{
- 
-  margin: 0 auto;
+  left: 0px !important;
+  display: block;
+  position: relative;
   list-style: none;
   text-align: left;
   width: 671px;
   height: 150px;
   padding-left:13px ;
-  position: absolute;
+ 
+  
   /* absoulute可以解决水平显示的问题 */
-  /* transition: left 3s; */
+  transition: left 3s;
 }
 .itemul2{
- 
+  overflow: hidden;
   margin: 0 auto;
   list-style: none;
   text-align: left;
@@ -280,7 +453,8 @@ export default {
   background: green;
   float: left;
   margin-bottom: 10px;
-  
+  position: relative;
+
 }
 
 .card{
@@ -295,9 +469,11 @@ export default {
 .midpart{
  
   overflow: hidden;
+  display: inline;
   width: 700px;
   height: 200px;
   background: grey;
+  float: left;
 }
 .itemhref{
   font-size: 12px;
@@ -424,4 +600,36 @@ template{
   height: 140px;
   border: 1px solid black;
 }
+.bottom-itemsong{
+  width: 230px;
+  height: 30px;
+  text-align: left; 
+  list-style: none;
+  
+ 
+  /* padding: 15px; */
+}
+
+.unmark{
+  background: #e8e8e8;
+}
+.songtitle{
+  font-size: 12px;
+  line-height: 15px;
+  margin-left: 10px;
+}
+.bottombox{
+  margin: 1px 0 5px 32px;
+
+
+}
+.songnum{
+  margin-right: 10px;
+}
+.end{
+  text-align: right;
+  padding-right: 32px;
+  
+}
+
 </style>
