@@ -7,7 +7,9 @@
       </el-carousel-item>
    
     </el-carousel>
+    <div class="contenttag">
 
+    
     <div class="maintag">
 
     <div class="nav1">
@@ -198,18 +200,77 @@
                   
                   </dd> 
             </dl>
-
-
-
-            
-            
-          
-          
-            
         </div>
     </div>
-    
-    
+    </div>
+    <!-- right side content -->
+    <div class="rightside">
+      <!-- usermode -->
+      <div class="userinfo">
+        <!-- 用户头像信息 -->
+      <div class="headimg">
+        <a href="" class="userimg">
+          <img class="imgsize" src="../assets/image/user/user1.jpg" alt="">
+        </a>
+        <div class="usertext">
+          <h4><a class="username" href="#">Takaku</a></h4>
+          <div class="icon2"> 
+         <a class="u-lv" href="">LV5</a>
+          </div>
+          <div class="clear"></div>
+          <!-- 消除浮动影响 -->
+        <div class="signarea">
+          <!-- 用户签到区域 -->
+          <a class="signin" href="">
+            <span>签到</span>
+          </a>
+        </div>
+        </div>
+        
+      </div>
+      <ul class="userstatus">
+        <li><a class="datastyle" href=""><strong class="strongfont">1</strong>
+        <p><span>关注</span></p></a></li>
+        
+        <li class="line2"><a class="datastyle" href=""><strong class="strongfont">1</strong>
+         <p><span>粉丝</span></p></a></li>
+        <li><a class="datastyle" href=""><strong class="strongfont">1</strong>
+         <p><span>动态</span></p></a></li>
+      </ul>
+      </div>
+       <div class="line3">
+         <span class="span1">入住歌手</span>
+          <span class="span2">查看全部>></span>
+         
+       </div>
+        <a class="singer" href="">
+          <img class="singerimg" src="../assets/image/singer/1.jpg">
+          <div class="singertext">
+            <div class="singername">张惠妹aMEI</div>
+             <div class="singertype">台湾歌手张惠妹</div>
+          </div>
+        </a>
+        <a class="singer" href="">
+          <img class="singerimg" src="../assets/image/singer/1.jpg">
+          <div class="singertext">
+            <div class="singername">张惠妹aMEI</div>
+             <div class="singertype">台湾歌手张惠妹</div>
+          </div>
+        </a>
+        <a class="singer" href="">
+          <img class="singerimg" src="../assets/image/singer/1.jpg">
+          <div class="singertext">
+            <div class="singername">张惠妹aMEI</div>
+             <div class="singertype">台湾歌手张惠妹</div>
+          </div>
+        </a>
+         <a class="singer" href=""></a>
+         <div class="line3">
+         <span class="span1">热门主播</span>
+         
+         
+       </div>
+    </div>
   </div>
 
 </template>
@@ -350,6 +411,15 @@ export default {
 
 
 <style scoped>
+.contenttag{
+  overflow: hidden;
+  border:1px solid #d3d3d3 ;
+  position: relative;
+  right: -185px;
+  width: 981px;
+  height: auto;
+  /* background: yellow; */
+}
 /* div{ 
 white-space:nowrap; 
 }  */
@@ -398,7 +468,8 @@ white-space:nowrap;
   width: 800px;
   height: 480px;
   background: white;
-  left: 10px;
+  position: relative;
+  right: 3px;
 }
 .left{
   float: left;
@@ -467,9 +538,9 @@ white-space:nowrap;
   text-align: center;
 }
 .midpart{
- 
+  position: relative;
   overflow: hidden;
-  display: inline;
+  right: 38px;
   width: 700px;
   height: 200px;
   background: grey;
@@ -507,7 +578,7 @@ template{
   background:linear-gradient(to right,rgba(255,255,255,0),#0000CD,rgba(255,255,255,0))
 }
 .itembox{
-  margin-left: 50px;
+  margin-left: 43px;
   margin-top:50px ;
   width: auto;
   height: 185px;
@@ -515,10 +586,13 @@ template{
  
 }
 .itemtag{
+  position: relative;
+  right: 50px;
+  margin-right:30px ;
   margin-top:10px ;
   width: 800px;
   height: 550px;
-  background: grey;
+  background: white;
   display: flex;
   flex-flow: row wrap;
   /* justify-content: space-between; */
@@ -545,10 +619,12 @@ template{
   }
 
   .maintag{
-      
+      position: relative;
+      right: 140px;
+      overflow: hidden;
       margin: 0 auto;
       padding: 30px;
-      width: 860px;
+      width: 731px;
       height: 100%;
       background-color: white;
       border: 1px solid #d3d3d3;
@@ -631,5 +707,187 @@ template{
   padding-right: 32px;
   
 }
+.rightside{
+  position: relative;
+  left: 901px;
+  bottom: 1526px;
+  width:265px ;
+  height:180px ;
+  background: #f8f8f8;
+}
+.userinfo{
+  padding-top:22px ;
+  width: 252px;
+  height: 180px;
+  border: 1px solid #b2b2b2;
+  /* background: ; */
+}
+.headimg{
 
+width: 230px;
+height: 87px;
+margin: 0px 0px 0px 19px;
+}
+.userimg{
+  float: left;
+  width: 86px;
+  height: 86px;
+  padding: 2px;
+ 
+  border: 1px solid gray;
+}
+.imgsize{
+  display: block;
+  width: 80px;
+  height: 80px;
+  background: purple;
+  /* a标签放置img的时候需要将display设置成block模块 */
+}
+.usertext{
+  width: 126px;
+  height: 60px;
+  
+  float: left;
+  margin-left:18px ;
+  text-align: left;
+}
+.username{
+  /* float: left; */
+  color: black;
+  font-size: 16px;
+  vertical-align: middle;
+}
+.username:hover{
+  text-decoration: underline;
+}
+.u-lv {
+    width: 40px;
+    height: 17px;
+    border: 1px solid black;
+    font-weight: bold;
+    font-style: italic;
+    border-radius:12px ;
+    font-size: 12px;
+    display:block;
+    /* a标签是行内元素，所以需要设置成块级元素才能撑开宽高 */
+    text-align: center;
+}
+.signarea{
+  width: 100%;
+  height: 31px;
+ 
+}
+.signin{
+color: black;
+display: block;
+width: 75px;
+height: 30px;
+background: #eeeeee;
+color: #c9c9c9;
+border-radius: 5px;
+text-align: center;
+padding-top:2px ;
+margin-top: 15px;
+border: 1px solid #f8f8f8;
+}
+h4{
+  margin-bottom: 2px;
+}
+.userstatus{
+  list-style: none;
+  margin: 22px 0 0 22px;
+  text-align: left;
+  position: relative;
+  right: 47px;
+}
+.userstatus li{
+  float: left;
+  width: 45px;
+  height: 40px;
+  text-align: left;
+  /* background: olivedrab; */
+  margin: 0 5px 0 5px;
+  display: block;
+ 
+
+}
+.line2{
+   border-right: 1px solid grey;
+    border-left: 1px solid gray;
+    margin: 0 10px 0 0px !important;
+    padding-left: 5px;
+}
+.datastyle{
+  display: block;
+  color: #666666;
+  
+}
+.strongfont{
+  font-size: 20px;
+}
+p span{
+  font-size: 12px;
+}
+a p{
+  position: relative;
+  top: -5px;
+}
+.line3{
+  width: 210px;
+  height: 24px;
+  background: white;
+  margin: 22px 0 0 22px;
+  border-bottom: 1px solid #b2b2b2;
+  margin-bottom: 20px;
+}
+.span1{
+float: left;
+font-size: 12px;
+font-weight: bold;
+}
+.span2{
+  float: right;
+  font-size: 12px;
+}
+.singer{
+  display: block;
+  width: 205px;
+  height: 64px;
+  background: #fafafa;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  list-style: none;
+  border: 1px solid #e9e9e9;
+  overflow: hidden;
+}
+.singer:hover{
+  background: #bebebe;
+  
+}
+.singerimg{
+  width: 65px;
+  height: 65px;
+  background: purple;
+  float: left;
+}
+.singertext{
+  position: relative;
+  width: 135px;
+  height: 65px;
+ 
+  float: right;
+  padding-top: 10px;
+  text-align: left;
+  padding-left:5px ;
+}
+.singername{
+  font-size: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: black;
+}
+.singertype{
+font-size: 12px;
+color: gray;
+}
 </style>

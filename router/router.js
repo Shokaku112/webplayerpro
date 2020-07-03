@@ -1,24 +1,24 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Sampleplayer from '../src/views/sample.vue'
+import topbar from '../src/views/topbar/topbar.vue'
 import player from '../src/views/player.vue'
 Vue.use(Router)
 export default new Router({
     routes:[
         {
-            path:'/home',
-            name:'home',
-            component:Sampleplayer,
-            redirect:'home',
-            meta:{
-                title:''
-            }
-            
-        },
+            path: "/",
+            redirect: "player"
+          }, //最初重定向的网页
+          //路由重定向入口，用于配置多个vue组件模板
         {
             path:'/player',
             name:'player',
             component:player
+        },
+        {
+            path:'/topbar',
+            name:'topbar',
+            component:topbar
         }
     ]
 })
