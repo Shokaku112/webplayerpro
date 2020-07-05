@@ -1,5 +1,7 @@
 <template>
   <div>
+     <!-- v-on:success为子组件响应事件destroyed下的this.emit('success')，然后让父组件执行canceled方法 -->
+      <login v-if="iflogin" v-bind:loginstatus="iflogin" v-on:success="canceled()"></login>
       <!-- 导航条 -->
      <div class="topbar">
          <!-- 左侧图标部分 -->
@@ -37,15 +39,42 @@
         </div>
         <!-- 用户区域 -->
      <div class="userpart">
-         <img class="circle user"  src="../../assets/image/navbar/2.jpg" alt="">
+         <div class="clear"></div>
+         <img class="circle user" @click="renderlogin()"  src="../../assets/image/navbar/2.jpg" alt="">
+         <div class="userlist">
+
+         </div>
      </div>
      </div>
-     
+       
   </div>
 </template>
 
 <script>
+import login from '../login/login.vue'
+
+ 
 export default {
+    
+   components:{
+      login
+   },
+   data() {
+       return {
+           iflogin:false,
+
+       }
+   },
+   methods: {
+       renderlogin(){
+           this.iflogin=true;
+       },
+       canceled(){
+           this.iflogin=false;
+           console.log('success')
+       }
+      
+   },
 
 }
 </script>
@@ -144,13 +173,24 @@ input:focus{
 }
 .userpart{
     float: left;
+    
 }
 .user{
     margin-top: 16px;
     margin-left:120px ;
     width: 35px;
     height: 35px;
-
+   
 }
+.userlist{
+position: absolute;
+width: 160px;
+height: 245px;
+margin-left: 50px;
+background:#242424 ;
+
+z-index: 10;
+}
+
 </style>
 

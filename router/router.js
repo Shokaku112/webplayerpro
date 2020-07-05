@@ -19,6 +19,7 @@ export default new Router({
             path:'/topbar',
             name:'topbar',
             component:topbar
-        }
+        },
+       
     ]
 })
