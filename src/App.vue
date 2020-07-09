@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-     <Topbar></Topbar>
-      <router-view/>
+     <Topbar v-on:isLeft="getlog()" v-if="isactivated"></Topbar>
+      <router-view :key="$route.fullPath"/>
       <!-- //router模式 -->
+     
   </div>
 </template>
 
@@ -10,10 +11,34 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap'
 import 'bootstrap/dist/js/bootstrap.bundle'
+
 import Topbar from '../src/views/topbar/topbar'
 export default {
   components:{Topbar},
-  name: 'App',
+  // name: 'App',
+  data() {
+    return {
+      isactivated:true
+    }
+  },
+  methods: {
+    getlog(){
+    alert("notification from App.vue:user is jump to userinfomation")
+    
+    },
+    
+
+     
+  },
+ 
+  
+  mounted() {
+     // eslint-disable-next-line
+      this.bus.$on('isLeft', (val) => {
+       this.getlog()
+      });
+    }
+    
   
 }
 </script>

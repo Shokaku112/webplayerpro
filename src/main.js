@@ -9,7 +9,8 @@ import jq from 'jquery'
 Vue.config.productionTip = false
 Vue.use(elmentui)
 Vue.use(jq)
-
+Vue.prototype.bus=new Vue();
+// 在main.js中创建bus总线
 router.beforeEach((to,from,next)=>{
   if(to.meta.title){
     document.title=to.meta.title;

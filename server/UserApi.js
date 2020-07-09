@@ -2,6 +2,10 @@ const { Sequelize, DataTypes, Model } = require('sequelize');
 const express = require('express');
 const router = express.Router();
 const mysql=require('mysql2')
+const jwt=require('jsonwebtoken')
+const fs=require('fs')
+const path=require('path');
+// const { JSON } = require('mysql2/lib/constants/types');
 //连接数据库测试
 const sequelize = new Sequelize('datalist', 'root', '123456', {
     host: 'localhost',
@@ -15,14 +19,35 @@ const sequelize = new Sequelize('datalist', 'root', '123456', {
    router.get('/getuser',function (req,res,next) {
     const username=req.query.username
     const userpassword=req.query.userpwd
-   
+    const token=req.query.token;
+         
     var Userinfo={
         statusCode:-1,
         Username:'',
-        Userpassword:''
-        
+        Userpassword:'',
+        token:token
     }
-    async function makecall(){
+    console.log(token)
+    console.log(typeof token)
+    let that=this;
+    //如果token非空则进行token验证
+    if(token!="null"&&username==null&&userpassword==null){
+      console.log("enter token")
+      //第一个参数为传入的token值，第二个为约定使用的密钥
+      jwt.verify(token,'secret',(error,decoded)=>{
+         //如果error则说明该密钥是伪造或者错误的
+        if(error){
+          console.log(error.message)
+          return
+        }
+          //验证通过后，则输出密钥的内容信息
+        console.log(decoded)
+       JSON.stringify(decoded)
+        res.send(decoded)
+      })
+    }else if(username!=null&&userpassword!=null&&token=="null"){
+      console.log("enter make call")
+      async function makecall(){
         try {
            await sequelize.authenticate();
            console.log('Connection has been established successfully.');
@@ -39,6 +64,10 @@ const sequelize = new Sequelize('datalist', 'root', '123456', {
           allowNull: false
           // allowNull 默认为 true
         },
+        Userimg:{
+          type:DataTypes.STRING,
+          allowNull:true
+        }
       
        
       }, {
@@ -50,7 +79,7 @@ const sequelize = new Sequelize('datalist', 'root', '123456', {
     //   await User.sync()
        //创建用户
          
-    // const user1 = await User.create({ Username: "Lbb", Userpassword: "12353123" });
+   
     // console.log("user1's auto-generated ID:", user1.id);
     
     // User.sync() - 如果表不存在,则创建该表(如果已经存在,则不执行任何操作)
@@ -73,15 +102,36 @@ const sequelize = new Sequelize('datalist', 'root', '123456', {
 
           }
           else{
-            Userinfo={
-                statusCode:1,
-                Username:result[0].dataValues.Username,
-                Userpassword:result[0].dataValues.Userpassword
+            //正确之后添加用户信息与生成token
+          
+           
+            // var token = jwt.sign({ username, iat: Math.floor(Date.now() / 1000) - 30 }, 'shhhhh');
+            let userinomation={
+              Username:result[0].dataValues.Username,
+              Userimg:"user1.jpg",
+              
             }
-            console.log(result[0].dataValues.Username)
-            JSON.stringify(Userinfo)
-            res.send(Userinfo)
+           
+          var token=jwt.sign({
+            exp: Math.floor(Date.now() / 1000) + (60 * 60),
+            data: userinomation
+          }, 'secret');
+          Userinfo={
+            statusCode:1,
+            Username:result[0].dataValues.Username,
+            Userpassword:result[0].dataValues.Userpassword,
+            Userimg:"user1.jpg",
+            token:token
+        }
+      
+        
+         
+          JSON.stringify(Userinfo)
+              res.send(Userinfo)
+           
+            
           }
+         
           
       });
      
@@ -89,9 +139,15 @@ const sequelize = new Sequelize('datalist', 'root', '123456', {
            console.error('Unable to connect to the database:', error);
          }
         
-        
+        //  const user1 = await User.create({ Username: "shokaku112", Userpassword: "1234567" });
       }
+      
       makecall()
+    }else if(username==null&&userpassword==null&&token=="null"){
+      res.send("你TM好像还没登陆！")
+    }
+    
+
 
      
    }),

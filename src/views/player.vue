@@ -1,5 +1,6 @@
 <template>
   <div>
+     <login v-if="iflogin"  v-on:success="confirmed()"   v-on:destroyed="canceled()"></login>
     <el-carousel :interval="4000" type="card" height="200px" @change="onchanged">
       
       <el-carousel-item v-for="item in item" :key="item.index">
@@ -206,14 +207,22 @@
     <!-- right side content -->
     <div class="rightside">
       <!-- usermode -->
-      <div class="userinfo">
+      <div class="loginuserinfo"   :style="{ 'display': !infomation ? 'block' : 'none' }">
+        <div class="infomation" >
+          请点击登录
+          <div></div>
+          <button @click="renderlogin()" class="loginbtnbig">登录</button>
+        </div>
+      </div>
+      <div class="userinfo" :style="{ 'display': infomation ? 'block' : 'none' }" >
+      
         <!-- 用户头像信息 -->
       <div class="headimg">
         <a href="" class="userimg">
-          <img class="imgsize" src="../assets/image/user/user1.jpg" alt="">
+          <img class="imgsize" :src="user.imgurl" alt="">
         </a>
         <div class="usertext">
-          <h4><a class="username" href="#">Takaku</a></h4>
+          <h4><a class="username" href="#">{{user.name}}</a></h4>
           <div class="icon2"> 
          <a class="u-lv" href="">LV5</a>
           </div>
@@ -280,18 +289,26 @@ import pic1 from '../assets/image/1.jpg'
 import pic2 from '../assets/image/2.jpg'
 import pic3 from '../assets/image/3.jpg'
 import pic4 from '../assets/image/3.jpg'
-
+import login from '../views/login/login.vue'
 import 'jquery/dist/jquery.js'
 import 'bootstrap/dist/js/bootstrap.js'
 import 'bootstrap/dist/css/bootstrap.css'
-
+import axios from 'axios'
 
 
 
 export default {
- 
+ components:{
+      login
+   },
     data(){
       return{
+       user:{
+         name:"unknown",
+         imgurl:null
+       },
+       iflogin:false,
+       infomation:false,
        itemswip:[
          {
            isactive:true,
@@ -376,18 +393,95 @@ export default {
       }
     },
     methods:{
+      //使用该注释可以忽略eslint检测
+    // eslint-disable-next-line
       onchanged(index,oldindex){
            this.carouselIndex = index;
            this.index=index
-           console.log("new"+index)
-           console.log("old"+oldindex)
+          //  console.log("new"+index)
+          //  console.log("old"+oldindex)
         
       },
       itemright(){
         this.change='-675px !important'
         this.change3='left 3s'
 
-      }
+      },
+      renderlogin(){
+           this.iflogin=true;
+       },
+       canceled(){
+           this.iflogin=false;
+          //  console.log('success')
+           
+       },
+       confirmed(){
+          console.log(this.user.imgurl)
+          this.bus.$emit("message")
+           let data = JSON.parse(sessionStorage.getItem("Userinfo"));
+          // Object.assign方法 赋值 （目标对象， 源对象）
+          Object.assign(this, data);
+          this.user.imgurl=require("../assets/image/user/"+data.Userimg)
+          console.log(this.user.imgurl)
+          this.infomation=true;
+          this.iflogin=false;
+         
+         
+          console.log(data)
+          
+       },
+        setcookie(c_name,value,expireseconds){
+            var exdate=new Date();
+    exdate.setTime(exdate.getTime()+expireseconds * 1000);
+    document.cookie=c_name+ "=" +escape(value)+
+    ((expireseconds==null) ? "" : ";expires="+exdate.toGMTString())
+       },
+    getCookie(userName){
+      if (document.cookie.length>0){
+        let c_start=document.cookie.indexOf(userName+ "=");
+        if (c_start!=-1){
+          c_start=c_start + userName.length+1;
+        let  c_end=document.cookie.indexOf(";",c_start);
+          if (c_end==-1){ 
+              c_end=document.cookie.length;
+          }
+          return unescape(document.cookie.substring(c_start,c_end));
+        }
+     }
+    return null;
+     
+},
+
+        getUserinfo(){
+           let data = JSON.parse(sessionStorage.getItem("Userinfo"));
+          // Object.assign方法 赋值 （目标对象， 源对象）
+          Object.assign(this, data);
+          this.user.imgurl=require("../assets/image/user/"+data.Userimg)
+          this.user.name=data.Username
+         
+        },
+         iflogins(){
+         var Token=this.getCookie("token");
+         // eslint-disable-next-line
+         let that=this
+         let url="http://localhost:3001/user/getuser?token="+Token
+         axios.get(url)
+         .then(function(res){
+
+           console.log(res.data.data)
+           if(res.data.data){
+               that.infomation=true
+               that.bus.$emit("existuser")
+           }
+          
+           console.log(that.infomation)
+           
+         })
+         .catch(function(e){
+               console.log(e)
+           })
+  },
+       
       //onchanged事件是carouesl.js文件下watch下的监听变量activeIndex函数，里面有两个参数分为当前激活对象，和之前激活对象
     //  在子组件中需要向父组件传值处使用this.$emit("function",param);   //其中function为父组件定义函数，param为需要传递参数
     },
@@ -398,12 +492,30 @@ export default {
           this.item[i].style='blur(15px)'
         }
         this.item[this.index].style='blur(0px)'
-        console.log("changed")
+        // console.log("changed")
       },
-
+    
      
     },
-      
+    mounted() {
+      // 在子组件B中，在created或mounted等生命周期函数上，监听那个事件和获取那个值。
+      // eslint-disable-next-line
+      this.bus.$on('success', (val) => {
+          this.getUserinfo()
+          this.bus.$emit("message")
+         
+          this.infomation=true;
+          this.iflogin=false;
+       
+        this.infomation=true
+      });
+    },
+    created() {
+      this.iflogins()
+      this.getUserinfo()
+    },
+       // eslint-disable-next-line
+     
     
 
 }
@@ -713,14 +825,33 @@ template{
   bottom: 1526px;
   width:265px ;
   height:180px ;
-  background: #f8f8f8;
+  /* background: grey; */
+  border-right: 1px solid #b2b2b2;
 }
 .userinfo{
   padding-top:22px ;
   width: 252px;
   height: 180px;
-  border: 1px solid #b2b2b2;
+  
+  display: none;
   /* background: ; */
+}
+.loginuserinfo{
+  padding-top:22px ;
+  width: 252px;
+  height: 180px;
+  /* background: greenyellow; */
+
+}
+.loginbtnbig{
+  border-radius: 7px;
+  width: 100px;
+  height: 30px;
+  font-size: 12px;
+  background: #cf0f16;
+  color: white;
+  margin-top:30px ;
+  border: 1px solid #cf0f16;
 }
 .headimg{
 

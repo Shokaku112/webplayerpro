@@ -1,7 +1,7 @@
 <template>
   <div>
      <!-- v-on:success为子组件响应事件destroyed下的this.emit('success')，然后让父组件执行canceled方法 -->
-      <login v-if="iflogin" v-bind:loginstatus="iflogin" v-on:success="canceled()"></login>
+      <login v-if="iflogin" v-bind:loginstatus="iflogin" v-on:existuser="userconfirm()"  v-on:destroyed="canceled()"></login>
       <!-- 导航条 -->
      <div class="topbar">
          <!-- 左侧图标部分 -->
@@ -40,9 +40,14 @@
         <!-- 用户区域 -->
      <div class="userpart">
          <div class="clear"></div>
-         <img class="circle user" @click="renderlogin()"  src="../../assets/image/navbar/2.jpg" alt="">
+         <div class="nouser" :style="{ 'display': !userimg ? 'block' : 'none' }">   <a href="javascript:void(0)" @click="renderlogin()" >用户登录</a> </div>
+         <img class="circle user"  :src="imgurl" :style="{ 'display': userimg ? 'block' : 'none' }" alt="">
          <div class="userlist">
-
+             <ul class="tagul">
+                 <li class="taglist" v-for="item in taglist"  v-bind:key="item" ><a @click="jumprouter(item.url)" href="javascript:void(0)">{{item.name}}</a></li>
+                 <!-- 遇坑之一：a标签href不能为空值否则跳转路由的时候会出大问题（返回根路由草） -->
+                
+             </ul>
          </div>
      </div>
      </div>
@@ -62,19 +67,81 @@ export default {
    data() {
        return {
            iflogin:false,
+           userimg:false,
+        //    "用户信息","个人收藏歌曲","登出"
+           taglist:[
+               {
+                   name:"用户信息",
+                   url:"/player/user"
+
+               },
+               {
+                   name:"个人收藏歌曲",
+                   url:"321321"
+
+               },
+               {
+                   name:"登出",
+                   url:"3213212"
+
+               }
+           ],
+           imgurl:require("../../assets/image/user/user1.jpg")
+        //    checkedlogin:false,
+          
 
        }
    },
    methods: {
+       jumprouter(path){
+        //    const that=this
+           console.log(path)
+           this.$emit("isLeft")
+           this.$router.push(path);
+
+
+       },
+        getUserinfo(){
+           let data = JSON.parse(sessionStorage.getItem("Userinfo"));
+          // Object.assign方法 赋值 （目标对象， 源对象）
+          Object.assign(this, data);
+          this.imgurl=require("../../assets/image/user/"+data.Userimg)
+          
+         
+        },
        renderlogin(){
            this.iflogin=true;
        },
        canceled(){
            this.iflogin=false;
            console.log('success')
+       },
+       userconfirm(){
+           this.bus.$emit("message",false);
+           this.getUserinfo()
+           this.userimg=true;
+           this.iflogin=false;
+
+
        }
+       
       
    },
+   mounted() {
+      // 在子组件B中，在created或mounted等生命周期函数上，监听那个事件和获取那个值。
+      this.bus.$on('existuser', (val) => {
+        console.log(val)
+        this.userimg=true
+      });
+      
+      
+    },
+   
+    
+   
+    created() {
+       this.getUserinfo()
+    },
 
 }
 </script>
@@ -180,7 +247,14 @@ input:focus{
     margin-left:120px ;
     width: 35px;
     height: 35px;
-   
+    display: none;
+}
+.nouser{
+    margin-top: 26px;
+    margin-left:80px ;
+    width: 100px;
+    height: 35px;
+    color: white;
 }
 .userlist{
 position: absolute;
@@ -189,8 +263,15 @@ height: 245px;
 margin-left: 50px;
 background:#242424 ;
 
+
 z-index: 10;
 }
-
+.tagul{
+    list-style: none;
+    padding: 0;
+}
+.taglist{
+    
+}
 </style>
 
