@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @SpringBootTest
 @Component
 class MusicplayerApplicationTests {
 
-    @Autowired
+    @Resource
     private IUserDao userDao;
 
     @Autowired
@@ -27,7 +28,8 @@ class MusicplayerApplicationTests {
 
     @Test
     void testFindAllUser(){
-        List<User> users=userService.findAllUser();
+        //List<User> users=userService.findAllUser();
+        List<User> users=userDao.findAllUser();
         for (User user : users) {
             System.out.println(user);
         }
@@ -35,21 +37,37 @@ class MusicplayerApplicationTests {
 
     @Test
     void testFindUserByName(){
-        User user=userService.findUserByName("小红");
+        User user=userService.findUserByName("Normalife");
         System.out.println(user);
     }
 
     @Test
     void testGetUser(){
-        User user=userService.getUser("Mary","123456");
+        User user=userService.getUser("Normalife","456");
         System.out.println(user);
     }
 
-    @Test
-    void testGetUserByDao(){
 
-        User user=userDao.getUser("Mery","123456");
-        System.out.println(user);
+
+    @Test
+    void testSave(){
+        User user=new User();
+        user.setUserName("Lbb");
+        user.setPassword("123456");
+        if(userDao.findUserByUserName(user.getUserName())==null){
+            userDao.registerUser(user);
+        }
+        else{
+            System.out.println("当前用户名已存在");
+        }
+
+    }
+
+    @Test
+    void testUpdate(){
+        User user=userDao.findUserByUserName("Lbb");
+        user.setSex("男");
+        userDao.updateUser(user);
     }
 
 }
